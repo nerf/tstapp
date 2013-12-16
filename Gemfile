@@ -19,8 +19,12 @@ gem 'sqlite3'
 
 # Test requirements
 group :test, :development do
-  gem 'rspec', :group => 'test'
-  gem 'rack-test', :require => 'rack/test', :group => 'test'
+  gem 'rspec'
+end
+
+group :test do
+  gem 'rack-test', :require => 'rack/test'
+  gem 'shoulda-matchers'
 end
 
 # Padrino Stable Gem
