@@ -1,7 +1,7 @@
 Tstapp::App.controllers :owners, :parent => :companies, :provides => [:json] do
   
   post :index do
-    @owner = Owner.new params[:owner]
+    @owner = company_owners.new params[:owner]
 
     if @owner.save
       render 'owners/show'
@@ -11,7 +11,7 @@ Tstapp::App.controllers :owners, :parent => :companies, :provides => [:json] do
   end
 
   put :index, with: :id do
-    @owner = Owner.find params[:id]
+    @owner = company_owners.find params[:id]
 
     if @owner.update_attributes(params[:owner])
       render 'owners/show'
@@ -21,7 +21,7 @@ Tstapp::App.controllers :owners, :parent => :companies, :provides => [:json] do
   end
 
   delete :index, with: :id do
-    owner = Owner.find params[:id]
+    owner = company_owners.find params[:id]
 
     if owner.destroy
       status 200
@@ -34,6 +34,10 @@ Tstapp::App.controllers :owners, :parent => :companies, :provides => [:json] do
     status 400
 
     Oj.dump({errors: owner.errors.as_json})
+  end
+
+  define_method :company_owners do
+    Company.find(params[:company_id]).owners
   end
 
 end

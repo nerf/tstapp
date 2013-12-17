@@ -38,6 +38,7 @@ Bundler.require(:default, PADRINO_ENV)
 Padrino.before_load do
   Rabl.configure do |config|
     config.include_json_root = false
+    config.include_child_root = false
   end
 
   Rabl.register!

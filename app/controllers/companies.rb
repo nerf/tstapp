@@ -13,6 +13,7 @@ Tstapp::App.controllers :companies, :provides => [:json] do
 
   get :index, with: :id do
     @company = Company.find params[:id]
+    @owners = @company.owners
 
     render 'companies/show'
   end
