@@ -41,12 +41,32 @@ describe "CompaniesController" do
     end
   end
 
+  describe 'show company details' do
+    context 'valid id' do
+      before do
+        get "/companies/#{apple.id}"
+      end
 
-  # before do
-  #   get "/"
-  # end
+      it 'should get success' do
+        expect(last_response.status).to eq 200
+      end
 
-  # it "returns hello world" do
-  #   last_response.body.should == "Hello World"
-  # end
+      it 'should view company data' do
+        resp = Oj.load(last_response.body)
+
+        expect(resp['name']).to eq apple.name
+      end
+    end
+
+    context "invalid id" do
+      before do
+        get "/companies/5a"
+      end
+
+      it 'should receive error status' do
+        expect(last_response.status).to eq 404
+      end
+    end
+  end
+
 end

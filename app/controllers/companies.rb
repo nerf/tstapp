@@ -10,4 +10,14 @@ Tstapp::App.controllers :companies, :provides => [:json] do
     end
   end
 
+  get :index, with: :id do
+    begin
+      @company = Company.find params[:id]
+
+      render 'companies/show'
+    rescue
+      status 404
+    end
+  end
+
 end
