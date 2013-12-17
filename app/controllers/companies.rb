@@ -20,4 +20,10 @@ Tstapp::App.controllers :companies, :provides => [:json] do
     end
   end
 
+  get :index do
+    @companies = Company.all
+
+    render 'companies/index'
+  end
+
 end

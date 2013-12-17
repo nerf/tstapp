@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe "CompaniesController" do
-  let(:apple) { create :company, name: 'apple' }
-  let(:google) { create :company, name: 'google' }
+  let(:apple) { create :company, name: 'Apple Inc.' }
+  let(:google) { create :company, name: 'Google Inc.' }
 
   describe 'create company' do
     context 'with valid arguments' do
@@ -66,6 +66,30 @@ describe "CompaniesController" do
       it 'should receive error status' do
         expect(last_response.status).to eq 404
       end
+    end
+  end
+
+  describe 'list' do
+    before do
+      apple.id
+      google.id
+
+      get '/companies'
+
+    end
+
+    it 'should return all companies' do
+      resp = Oj.load(last_response.body, symbol_keys: true)
+      expected_resp = [
+        {id: apple.id, name: apple.name},
+        {id: google.id, name: google.name},
+      ]
+
+      expect(resp).to match_array expected_resp
+    end
+
+    it 'should get success' do
+      expect(last_response.status).to eq 200
     end
   end
 
