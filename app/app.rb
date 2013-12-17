@@ -58,5 +58,9 @@ module Tstapp
     #     render 'errors/505'
     #   end
     #
+
+    error ActiveRecord::RecordNotFound do
+      halt 404
+    end
   end
 end
