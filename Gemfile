@@ -10,6 +10,9 @@ gem 'thin' # or mongrel
 # Optional JSON codec (faster performance)
 gem 'oj'
 
+# JSON builder
+gem 'rabl'
+
 # Project requirements
 gem 'rake'
 
@@ -25,6 +28,8 @@ end
 group :test do
   gem 'rack-test', :require => 'rack/test'
   gem 'shoulda-matchers'
+  gem 'factory_girl'
+  gem 'database_cleaner'
 end
 
 # Padrino Stable Gem
