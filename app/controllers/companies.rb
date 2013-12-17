@@ -7,6 +7,7 @@ Tstapp::App.controllers :companies, :provides => [:json] do
       render 'companies/show'
     else
       status 400
+      Oj.dump({errors: @company.errors.as_json})
     end
   end
 
