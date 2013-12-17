@@ -62,5 +62,8 @@ module Tstapp
     error ActiveRecord::RecordNotFound do
       halt 404
     end
+
+    # CarrierWave
+    CarrierWave.root = File.join(Padrino.root, "public")
   end
 end

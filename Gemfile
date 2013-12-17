@@ -20,6 +20,9 @@ gem 'rake'
 gem 'activerecord', '>= 3.1', :require => 'active_record'
 gem 'pg'
 
+# file upload
+gem 'carrierwave', :require => %w(carrierwave carrierwave/orm/activerecord)
+
 # Test requirements
 group :test, :development do
   gem 'rspec'
