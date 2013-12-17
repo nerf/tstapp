@@ -93,4 +93,38 @@ describe "CompaniesController" do
     end
   end
 
+  describe 'change company' do
+    context 'valid company' do
+      before do
+        put "/companies/#{apple.id}", {company: {name: 'Microsoft'}}
+      end
+
+      it 'name should be changed' do
+        apple.reload
+
+        expect(apple.name).to eq 'Microsoft'
+      end
+
+      it 'should return updated record' do
+        resp = Oj.load(last_response.body, symbol_keys: true)
+
+        expect(resp[:name]).to eq 'Microsoft'
+      end
+
+      it 'should receive success' do
+        expect(last_response.status).to eq 200
+      end
+    end
+
+    context 'invalid company' do
+      before do
+        put "/company/a5"
+      end
+
+      it 'should receive error' do
+        expect(last_response.status).to eq 404
+      end
+    end
+  end
+
 end

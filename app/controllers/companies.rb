@@ -26,4 +26,16 @@ Tstapp::App.controllers :companies, :provides => [:json] do
     render 'companies/index'
   end
 
+  put :index, with: :id do
+    begin 
+      @company = Company.find params[:id]
+
+      @company.update_attributes(params[:company])
+
+      render 'companies/show'
+    rescue
+      status 404
+    end
+  end
+
 end
