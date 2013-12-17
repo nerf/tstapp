@@ -18,7 +18,7 @@ gem 'rake'
 
 # Component requirements
 gem 'activerecord', '>= 3.1', :require => 'active_record'
-gem 'sqlite3'
+gem 'pg'
 
 # Test requirements
 group :test, :development do

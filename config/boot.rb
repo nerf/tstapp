@@ -32,6 +32,16 @@ Bundler.require(:default, PADRINO_ENV)
 #   include Padrino::Helpers::TranslationHelpers
 # end
 
+# load yml config file
+config_file = File.expand_path('../config.yml', __FILE__)
+if File.file?(config_file)
+  config = YAML.load(File.read(config_file))
+  config.merge! config.fetch(PADRINO_ENV, {})
+  config.each do |key,value|
+    ENV[key] = value.to_s
+  end
+end
+
 ##
 # Add your before (RE)load hooks here
 #

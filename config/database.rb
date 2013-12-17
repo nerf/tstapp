@@ -13,22 +13,14 @@
 #     :socket    => '/tmp/mysql.sock'
 #   }
 #
-ActiveRecord::Base.configurations[:development] = {
-  :adapter => 'sqlite3',
-  :database => Padrino.root('db', 'tstapp_development.db')
 
-}
-
-ActiveRecord::Base.configurations[:production] = {
-  :adapter => 'sqlite3',
-  :database => Padrino.root('db', 'tstapp_production.db')
-
-}
-
-ActiveRecord::Base.configurations[:test] = {
-  :adapter => 'sqlite3',
-  :database => Padrino.root('db', 'tstapp_test.db')
-
+ActiveRecord::Base.configurations[PADRINO_ENV.to_sym] = {
+  :adapter   => 'postgresql',
+  :database  => ENV['dbname'],
+  :username  => ENV['dbusername'],
+  :password  => ENV['dbpassword'],
+  :host      => ENV['dbhost'],
+  :port      => ENV['dbport']
 }
 
 # Setup our logger
