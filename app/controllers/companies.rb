@@ -11,13 +11,9 @@ Tstapp::App.controllers :companies, :provides => [:json] do
   end
 
   get :index, with: :id do
-    begin
-      @company = Company.find params[:id]
+    @company = Company.find params[:id]
 
-      render 'companies/show'
-    rescue
-      status 404
-    end
+    render 'companies/show'
   end
 
   get :index do
@@ -27,14 +23,13 @@ Tstapp::App.controllers :companies, :provides => [:json] do
   end
 
   put :index, with: :id do
-    begin 
-      @company = Company.find params[:id]
+    @company = Company.find params[:id]
 
-      @company.update_attributes(params[:company])
-
+    if @company.update_attributes(params[:company])
       render 'companies/show'
-    rescue
-      status 404
+    else
+      status 400
+      Oj.dump({errors: @company.errors.as_json})
     end
   end
 

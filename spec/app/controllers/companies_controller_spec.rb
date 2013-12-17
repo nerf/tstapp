@@ -114,6 +114,23 @@ describe "CompaniesController" do
       it 'should receive success' do
         expect(last_response.status).to eq 200
       end
+
+    end
+
+    context 'invalid parameters' do
+      before do
+        put "/companies/#{apple.id}", {company: {name: ''}}
+      end
+
+      it 'should receive error' do
+        expect(last_response.status).to eq 400
+      end
+
+      it 'show get list of bad parameters' do
+        resp = Oj.load(last_response.body, symbol_keys: true)
+
+        expect(resp[:errors]).to have_key :name
+      end
     end
 
     context 'invalid company' do
