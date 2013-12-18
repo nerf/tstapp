@@ -2,8 +2,9 @@ Tstapp::App.controllers :owners, :parent => :companies, :provides => [:json] do
   
   get :index do
     company = Company.find params[:company_id]
-
     @owners = company.owners
+
+    render 'owners/index'
   end
 
   post :index do

@@ -55,7 +55,15 @@ angular.module('tstApp.controllers', []).
     };
 
   }]).
-  controller('OwnersCompanyCtrl', ['$scope', '$location', '$routeParams', 'Owner', function($scope, $location, $routeParams, Owner){
+  controller('OwnersCompanyCtrl', ['$scope', '$location', '$routeParams', 'Owner', 'Company', function($scope, $location, $routeParams, Owner, Company){
     $scope.owners = Owner.query({company_id: $routeParams.company_id});
+    $scope.company = Company.get({id: $routeParams.company_id})
 
+    $scope.editOwner = function() {
+      alert('TODO');
+    };
+
+    $scope.deleteOwner = function() {
+      alert('TODO');
+    };
   }]);
