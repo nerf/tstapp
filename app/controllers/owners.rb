@@ -1,7 +1,13 @@
 Tstapp::App.controllers :owners, :parent => :companies, :provides => [:json] do
   
+  get :index do
+    company = Company.find params[:company_id]
+
+    @owners = company.owners
+  end
+
   post :index do
-    @owner = company_owners.new params[:owner]
+    @owner = company_owners.new parsed_params[:owner]
 
     if @owner.save
       render 'owners/show'
@@ -13,7 +19,7 @@ Tstapp::App.controllers :owners, :parent => :companies, :provides => [:json] do
   put :index, with: :id do
     @owner = company_owners.find params[:id]
 
-    if @owner.update_attributes(params[:owner])
+    if @owner.update_attributes(parsed_params[:owner])
       render 'owners/show'
     else
       show_errors(@owner)

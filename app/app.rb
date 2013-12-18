@@ -65,5 +65,15 @@ module Tstapp
 
     # CarrierWave
     CarrierWave.root = File.join(Padrino.root, "public")
+
+    helpers do
+      def parsed_params
+        @parsed_params ||= if request.content_type.include?("application/json;")
+          Oj.load(request.body, symbol_keys: true)
+        else
+          params
+        end
+      end
+    end
   end
 end
