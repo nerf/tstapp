@@ -9,5 +9,5 @@ class Company < ActiveRecord::Base
   validates :email, format: { with: EMAIL }, if: "self.email?"
   validates :phone, format: { with: PHONE_NUM }, if: "self.phone?"
 
-  has_many :owners
+  has_many :owners, dependent: :destroy
 end
